@@ -27,6 +27,11 @@ jobs:
       - run: pnpm --version || npm i -g pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
+      - name: Verify static export exists
+        run: |
+          ls -la
+          ls -la out || true
+          test -f out/index.html || (echo "out/index.html not found" && exit 1)
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
