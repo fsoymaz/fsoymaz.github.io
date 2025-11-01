@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build && touch out/.nojekyll",
+    "build": "next build && touch out/.nojekyll && cp public/404.html out/404.html 2>/dev/null || true",
     "dev": "next dev",
     "lint": "eslint .",
     "start": "next start",
