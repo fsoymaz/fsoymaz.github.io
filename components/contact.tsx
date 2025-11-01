@@ -70,36 +70,39 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
+    <section
+      id="contact"
+      className="py-24 px-4 bg-gradient-to-b from-muted/20 to-background"
+    >
+      <div className="max-w-7xl mx-auto">
         <div className="space-y-12">
           <div className="space-y-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-balance tracking-tight">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-balance tracking-tight">
               İletişime Geçin
             </h2>
             <div className="h-1 w-24 bg-accent rounded-full mx-auto" />
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto pt-4">
               Bir projeniz mi var? Birlikte çalışmak ister misiniz? Benimle
               iletişime geçmekten çekinmeyin!
             </p>
           </div>
 
           {/* İki sütunlu düzen: Sol bilgi kartları, sağ form */}
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="space-y-4">
-              <p className="text-muted-foreground">
+          <div className="grid gap-8 lg:grid-cols-2">
+            <div className="space-y-6">
+              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
                 Sorularınız, önerileriniz veya iş birliği talepleriniz için bana
                 ulaşabilirsiniz. En kısa sürede geri dönüş yaparım.
               </p>
 
-              <div className="space-y-4">
-                <Card className="border-transparent shadow-[0_10px_30px_-15px_rgba(0,0,0,0.3)]">
-                  <CardContent className="p-5 flex items-start gap-3">
-                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-accent/10 text-accent">
-                      <MapPin className="h-4 w-4" />
+              <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-4">
+                <Card className="border-2 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                  <CardContent className="p-6 flex items-start gap-4">
+                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent flex-shrink-0">
+                      <MapPin className="h-5 w-5" />
                     </span>
                     <div>
-                      <div className="font-medium">Adres</div>
+                      <div className="font-semibold text-base mb-1">Adres</div>
                       <div className="text-sm text-muted-foreground">
                         İstanbul, Türkiye
                       </div>
@@ -107,16 +110,18 @@ export function Contact() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-transparent shadow-[0_10px_30px_-15px_rgba(0,0,0,0.3)]">
-                  <CardContent className="p-5 flex items-start gap-3">
-                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-accent/10 text-accent">
-                      <Mail className="h-4 w-4" />
+                <Card className="border-2 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                  <CardContent className="p-6 flex items-start gap-4">
+                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent flex-shrink-0">
+                      <Mail className="h-5 w-5" />
                     </span>
                     <div>
-                      <div className="font-medium">E‑posta</div>
+                      <div className="font-semibold text-base mb-1">
+                        E‑posta
+                      </div>
                       <a
                         href="mailto:fthsymz60@gmail.com"
-                        className="text-sm text-muted-foreground hover:text-accent"
+                        className="text-sm text-muted-foreground hover:text-accent transition-colors"
                       >
                         fthsymz60@gmail.com
                       </a>
@@ -124,16 +129,18 @@ export function Contact() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-transparent shadow-[0_10px_30px_-15px_rgba(0,0,0,0.3)]">
-                  <CardContent className="p-5 flex items-start gap-3">
-                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-accent/10 text-accent">
-                      <Phone className="h-4 w-4" />
+                <Card className="border-2 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                  <CardContent className="p-6 flex items-start gap-4">
+                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent flex-shrink-0">
+                      <Phone className="h-5 w-5" />
                     </span>
                     <div>
-                      <div className="font-medium">Telefon</div>
+                      <div className="font-semibold text-base mb-1">
+                        Telefon
+                      </div>
                       <a
                         href="tel:+905551402602"
-                        className="text-sm text-muted-foreground hover:text-accent"
+                        className="text-sm text-muted-foreground hover:text-accent transition-colors"
                       >
                         +90 555 140 26 02
                       </a>
@@ -141,13 +148,15 @@ export function Contact() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-transparent shadow-[0_10px_30px_-15px_rgba(0,0,0,0.3)]">
-                  <CardContent className="p-5 flex items-start gap-3">
-                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-accent/10 text-accent">
-                      <Clock className="h-4 w-4" />
+                <Card className="border-2 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                  <CardContent className="p-6 flex items-start gap-4">
+                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent flex-shrink-0">
+                      <Clock className="h-5 w-5" />
                     </span>
                     <div>
-                      <div className="font-medium">Çalışma Saatleri</div>
+                      <div className="font-semibold text-base mb-1">
+                        Çalışma Saatleri
+                      </div>
                       <div className="text-sm text-muted-foreground">
                         Hafta içi: 09:00 – 18:00
                       </div>
@@ -157,10 +166,12 @@ export function Contact() {
               </div>
             </div>
 
-            <Card className="max-w-3xl border-muted-foreground/10 shadow-md">
-              <CardHeader className="pb-2 md:pb-3">
-                <CardTitle className="text-2xl">Mesaj Gönderin</CardTitle>
-                <CardDescription className="text-base">
+            <Card className="border-2 hover:border-accent/50 transition-all duration-300 shadow-xl">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-2xl md:text-3xl">
+                  Mesaj Gönderin
+                </CardTitle>
+                <CardDescription className="text-base md:text-lg pt-2">
                   Tüm alanları doldurarak bana ulaşabilirsiniz.
                 </CardDescription>
               </CardHeader>
@@ -238,10 +249,10 @@ export function Contact() {
                   <Button
                     type="submit"
                     disabled={submitting}
-                    className="w-full h-12 text-base gap-2 bg-gradient-to-r from-accent to-accent/80 text-accent-foreground hover:from-accent/90 hover:to-accent disabled:opacity-70"
+                    className="w-full h-12 md:h-14 text-base md:text-lg gap-2 bg-gradient-to-r from-accent to-accent/80 text-accent-foreground hover:from-accent/90 hover:to-accent/70 disabled:opacity-70 transition-all hover:shadow-lg"
                     size="lg"
                   >
-                    <Send className="h-4 w-4" />{" "}
+                    <Send className="h-5 w-5" />{" "}
                     {submitting ? "Gönderiliyor..." : "Mesaj Gönder"}
                   </Button>
                   {sent === "ok" && (
