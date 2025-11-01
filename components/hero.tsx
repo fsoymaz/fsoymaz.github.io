@@ -40,6 +40,11 @@ export function Hero() {
   return (
     <section className="min-h-screen flex items-center justify-center px-4 py-20 relative overflow-hidden pt-32 md:pt-40">
       <ThreeBg className="absolute inset-0" />
+      {/* Additional hero effects */}
+      <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-accent/10" />
+      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_50%,transparent_0%,hsl(var(--accent)/0.03)_50%,transparent_100%)]" />
+      <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(circle_at_80%_50%,transparent_0%,hsl(var(--accent)/0.03)_50%,transparent_100%)]" />
+
       <div className="max-w-7xl w-full relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">

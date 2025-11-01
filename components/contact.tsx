@@ -22,6 +22,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useState } from "react";
+import {
+  DotsPattern,
+  AnimatedMeshGradient,
+} from "@/components/background-patterns";
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -72,9 +76,15 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="py-24 px-4 bg-gradient-to-b from-muted/20 to-background"
+      className="py-24 px-4 relative overflow-hidden bg-gradient-to-b from-muted/20 via-background to-background"
     >
-      <div className="max-w-7xl mx-auto">
+      {/* Creative Background for Contact */}
+      <AnimatedMeshGradient className="opacity-40" />
+      <DotsPattern className="opacity-25" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_hsl(var(--accent)/0.08),_transparent)]" />
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="space-y-12">
           <div className="space-y-4 text-center">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-balance tracking-tight">
