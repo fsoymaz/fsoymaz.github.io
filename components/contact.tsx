@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MapPin, Phone, Send, Clock } from "lucide-react";
+import { Mail, MapPin, Phone, Send } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -98,16 +98,16 @@ export function Contact() {
           </div>
 
           {/* İki sütunlu düzen: Sol bilgi kartları, sağ form */}
-          <div className="grid gap-8 lg:grid-cols-2">
-            <div className="space-y-6">
+          <div className="grid gap-8 lg:grid-cols-2 lg:items-stretch">
+            <div className="flex flex-col space-y-6 h-full">
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
                 Sorularınız, önerileriniz veya iş birliği talepleriniz için bana
                 ulaşabilirsiniz. En kısa sürede geri dönüş yaparım.
               </p>
 
-              <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-4">
-                <Card className="border-2 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                  <CardContent className="p-6 flex items-start gap-4">
+              <div className="flex-1 grid sm:grid-cols-2 lg:grid-cols-1 gap-4">
+                <Card className="border-2 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 h-full">
+                  <CardContent className="p-6 flex items-start gap-4 h-full">
                     <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent flex-shrink-0">
                       <MapPin className="h-5 w-5" />
                     </span>
@@ -120,8 +120,8 @@ export function Contact() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-2 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                  <CardContent className="p-6 flex items-start gap-4">
+                <Card className="border-2 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 h-full">
+                  <CardContent className="p-6 flex items-start gap-4 h-full">
                     <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent flex-shrink-0">
                       <Mail className="h-5 w-5" />
                     </span>
@@ -139,8 +139,8 @@ export function Contact() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-2 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                  <CardContent className="p-6 flex items-start gap-4">
+                <Card className="border-2 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 h-full">
+                  <CardContent className="p-6 flex items-start gap-4 h-full">
                     <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent flex-shrink-0">
                       <Phone className="h-5 w-5" />
                     </span>
@@ -157,27 +157,11 @@ export function Contact() {
                     </div>
                   </CardContent>
                 </Card>
-
-                <Card className="border-2 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                  <CardContent className="p-6 flex items-start gap-4">
-                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent flex-shrink-0">
-                      <Clock className="h-5 w-5" />
-                    </span>
-                    <div>
-                      <div className="font-semibold text-base mb-1">
-                        Çalışma Saatleri
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Hafta içi: 09:00 – 18:00
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
               </div>
             </div>
 
-            <Card className="border-2 hover:border-accent/50 transition-all duration-300 shadow-xl">
-              <CardHeader className="pb-4">
+            <Card className="border-2 hover:border-accent/50 transition-all duration-300 shadow-xl h-full flex flex-col">
+              <CardHeader className="pb-4 flex-shrink-0">
                 <CardTitle className="text-2xl md:text-3xl">
                   Mesaj Gönderin
                 </CardTitle>
@@ -185,96 +169,107 @@ export function Contact() {
                   Tüm alanları doldurarak bana ulaşabilirsiniz.
                 </CardDescription>
               </CardHeader>
-              <CardContent className="pt-4 pb-4 md:pt-6 md:pb-6">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">Ad Soyad</Label>
-                      <Input
-                        id="name"
-                        placeholder="Adınız ve soyadınız"
-                        value={formData.name}
+              <CardContent className="pt-4 pb-4 md:pt-6 md:pb-6 flex-1 flex flex-col">
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-6 flex-1 flex flex-col"
+                >
+                  <div className="flex-1 space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      <div className="space-y-2">
+                        <Label htmlFor="name">Ad Soyad</Label>
+                        <Input
+                          id="name"
+                          placeholder="Adınız ve soyadınız"
+                          value={formData.name}
+                          onChange={(e) =>
+                            setFormData({ ...formData, name: e.target.value })
+                          }
+                          required
+                          className="h-12 text-base"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="email">E‑posta</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          placeholder="ornek@email.com"
+                          value={formData.email}
+                          onChange={(e) =>
+                            setFormData({ ...formData, email: e.target.value })
+                          }
+                          required
+                          className="h-12 text-base"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      <div className="space-y-2">
+                        <Label htmlFor="phone">Telefon</Label>
+                        <Input
+                          id="phone"
+                          placeholder="+90 (5xx) xxx xx xx"
+                          className="h-12 text-base"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label>Konu</Label>
+                        <Select>
+                          <SelectTrigger className="w-full h-12 text-base">
+                            <SelectValue placeholder="Konu seçiniz" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="genel">Genel</SelectItem>
+                            <SelectItem value="teklif">
+                              Proje Teklifi
+                            </SelectItem>
+                            <SelectItem value="isbirligi">
+                              İş Birliği
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 flex-1 flex flex-col">
+                      <Label htmlFor="message">Mesajınız</Label>
+                      <Textarea
+                        id="message"
+                        placeholder="Mesajınızı buraya yazınız..."
+                        rows={7}
+                        value={formData.message}
                         onChange={(e) =>
-                          setFormData({ ...formData, name: e.target.value })
+                          setFormData({ ...formData, message: e.target.value })
                         }
                         required
-                        className="h-12 text-base"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">E‑posta</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="ornek@email.com"
-                        value={formData.email}
-                        onChange={(e) =>
-                          setFormData({ ...formData, email: e.target.value })
-                        }
-                        required
-                        className="h-12 text-base"
+                        className="min-h-[140px] flex-1 text-base"
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Telefon</Label>
-                      <Input
-                        id="phone"
-                        placeholder="+90 (5xx) xxx xx xx"
-                        className="h-12 text-base"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Konu</Label>
-                      <Select>
-                        <SelectTrigger className="w-full h-12 text-base">
-                          <SelectValue placeholder="Konu seçiniz" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="genel">Genel</SelectItem>
-                          <SelectItem value="teklif">Proje Teklifi</SelectItem>
-                          <SelectItem value="isbirligi">İş Birliği</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
+                  <div className="mt-auto pt-4 space-y-2">
+                    <Button
+                      type="submit"
+                      disabled={submitting}
+                      className="w-full h-12 md:h-14 text-base md:text-lg gap-2 bg-gradient-to-r from-accent to-accent/80 text-accent-foreground hover:from-accent/90 hover:to-accent/70 disabled:opacity-70 transition-all hover:shadow-lg"
+                      size="lg"
+                    >
+                      <Send className="h-5 w-5" />{" "}
+                      {submitting ? "Gönderiliyor..." : "Mesaj Gönder"}
+                    </Button>
+                    {sent === "ok" && (
+                      <p className="text-sm text-emerald-600">
+                        Mesajınız gönderildi. Teşekkürler!
+                      </p>
+                    )}
+                    {sent === "err" && (
+                      <p className="text-sm text-red-600">
+                        Gönderim başarısız. Lütfen daha sonra tekrar deneyin.
+                      </p>
+                    )}
                   </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Mesajınız</Label>
-                    <Textarea
-                      id="message"
-                      placeholder="Mesajınızı buraya yazınız..."
-                      rows={7}
-                      value={formData.message}
-                      onChange={(e) =>
-                        setFormData({ ...formData, message: e.target.value })
-                      }
-                      required
-                      className="min-h-[140px] text-base"
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    disabled={submitting}
-                    className="w-full h-12 md:h-14 text-base md:text-lg gap-2 bg-gradient-to-r from-accent to-accent/80 text-accent-foreground hover:from-accent/90 hover:to-accent/70 disabled:opacity-70 transition-all hover:shadow-lg"
-                    size="lg"
-                  >
-                    <Send className="h-5 w-5" />{" "}
-                    {submitting ? "Gönderiliyor..." : "Mesaj Gönder"}
-                  </Button>
-                  {sent === "ok" && (
-                    <p className="text-sm text-emerald-600">
-                      Mesajınız gönderildi. Teşekkürler!
-                    </p>
-                  )}
-                  {sent === "err" && (
-                    <p className="text-sm text-red-600">
-                      Gönderim başarısız. Lütfen daha sonra tekrar deneyin.
-                    </p>
-                  )}
                 </form>
               </CardContent>
             </Card>

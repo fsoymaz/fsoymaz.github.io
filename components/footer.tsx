@@ -2,7 +2,6 @@ import {
   Mail,
   MapPin,
   Phone,
-  Clock,
   ArrowRight,
   Github,
   Linkedin,
@@ -126,9 +125,6 @@ export function Footer() {
             >
               <Phone className="size-4 text-white/80" /> +90 555 140 26 02
             </a>
-            <div className="flex items-center gap-2">
-              <Clock className="size-4 text-white/80" /> Pzt–Cum: 09:00 – 18:00
-            </div>
           </div>
         </div>
       </div>
