@@ -21,36 +21,50 @@ const projects = [
   {
     title: "Restoran Projesi",
     description:
-      "Menü yönetimi, sipariş akışı ve rezervasyonları yöneten modern restoran uygulaması.",
+      "Django REST Framework ile geliştirilmiş backend API, PostgreSQL veritabanı ve Next.js frontend ile oluşturulmuş full-stack restoran yönetim sistemi. Menü yönetimi, sipariş takibi ve rezervasyon modülleri içerir. Django ORM ile veritabanı işlemleri optimize edildi.",
     image: "/restoranprojesi.png",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+    tags: [
+      "Django",
+      "Django REST",
+      "PostgreSQL",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+    ],
     github: "https://github.com/fsoymaz/restoran-Projesi",
     demo: "#",
   },
   {
     title: "Sigara Bırakma Uygulaması",
     description:
-      "Günlük takip, hedefler ve bildirimlerle sigara bırakma sürecini destekleyen uygulama.",
+      "Go (Golang) ve Gin framework ile yüksek performanslı REST API backend geliştirildi. PostgreSQL veritabanı ve Redis cache ile optimize edilmiş veri erişimi sağlandı. Go'nun goroutine ve channel özellikleri ile concurrent işlemler yönetildi. Next.js ile modern frontend arayüzü geliştirildi.",
     image: "/sigarasitesi.png",
-    tags: ["Next.js", "TypeScript", "Supabase"],
+    tags: ["Go", "Gin", "PostgreSQL", "Redis", "Next.js", "TypeScript"],
     github: "https://github.com/fsoymaz/quit-smoking-site",
     demo: "#",
   },
   {
     title: "Coffee Satış Sitesi",
     description:
-      "Ürün listeleme, sepet ve ödeme akışlarıyla kahve satışına odaklı e-ticaret sitesi.",
+      "ASP.NET Core Web API ile backend servisleri geliştirildi. Entity Framework Core ile SQL Server veritabanı işlemleri yapıldı. RESTful API mimarisi ile ürün yönetimi, sepet işlemleri ve sipariş takibi modülleri oluşturuldu. Next.js ile responsive e-ticaret arayüzü geliştirildi.",
     image: "/coffee.png",
-    tags: ["Next.js", "Stripe", "Tailwind CSS"],
+    tags: ["ASP.NET Core", "C#", "SQL Server", "Entity Framework", "Next.js"],
     github: "https://github.com/fsoymaz/coffeFrontend",
     demo: "#",
   },
   {
     title: "Rent A Car Sitesi",
     description:
-      "Araç arama, rezervasyon ve fiyatlandırma modülleriyle araç kiralama platformu.",
+      "ASP.NET Core Web API ile RESTful backend servisleri geliştirildi. SQL Server veritabanı, Entity Framework Core ORM ile yönetildi. Araç yönetimi, rezervasyon, fiyatlandırma ve müşteri modülleri oluşturuldu. SOLID prensipleri ve Clean Architecture yaklaşımı uygulandı. React ile frontend arayüzü geliştirildi.",
     image: "/rentacar.png",
-    tags: ["ASP.NET Core", "C#", "SQL Server", "React"],
+    tags: [
+      "ASP.NET Core",
+      "C#",
+      "SQL Server",
+      "Entity Framework",
+      "REST API",
+      "React",
+    ],
     github: "https://github.com/fsoymaz/Car-Rental",
     demo: "#",
   },
@@ -337,10 +351,7 @@ export function Projects() {
                       ))}
                     </div>
 
-                    <div className="flex items-center justify-between pt-4 border-t border-border/50">
-                      <div className="text-sm text-muted-foreground">
-                        Proje Detaylarını İncele
-                      </div>
+                    <div className="flex items-center justify-end pt-4 border-t border-border/50">
                       <div className="flex gap-3">
                         {projects[selectedIndex].github && (
                           <Button
