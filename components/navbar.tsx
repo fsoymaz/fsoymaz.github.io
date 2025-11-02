@@ -8,12 +8,18 @@ import { useTheme } from "next-themes";
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const toggleTheme = () => {
+    if (!mounted) return;
+    const currentTheme = resolvedTheme || theme;
+    setTheme(currentTheme === "dark" ? "light" : "dark");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -63,10 +69,12 @@ export function Navbar() {
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                onClick={toggleTheme}
+                disabled={!mounted}
                 className="h-9 w-9"
+                aria-label="Toggle theme"
               >
-                {mounted && theme === "dark" ? (
+                {mounted && (resolvedTheme || theme) === "dark" ? (
                   <Sun className="h-4 w-4" />
                 ) : (
                   <Moon className="h-4 w-4" />
@@ -96,10 +104,12 @@ export function Navbar() {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              onClick={toggleTheme}
+              disabled={!mounted}
               className="h-9 w-9"
+              aria-label="Toggle theme"
             >
-              {mounted && theme === "dark" ? (
+              {mounted && (resolvedTheme || theme) === "dark" ? (
                 <Sun className="h-4 w-4" />
               ) : (
                 <Moon className="h-4 w-4" />
