@@ -195,8 +195,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    // Google Search Console verification code'unuzu buraya ekleyin
-    // google: "your-google-verification-code",
+    google: "BLS8K-P2HPISm", // Google Search Console verification code
     // Yandex verification code'unuzu buraya ekleyin
     // yandex: "your-yandex-verification-code",
   },
