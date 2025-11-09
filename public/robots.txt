@@ -1,0 +1,13 @@
+# robots.txt for Fatih Soymaz Portfolio
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Sitemap
+Sitemap: https://fsoymaz.github.io/sitemap.xml
+
+# Crawl-delay (optional - uncomment if needed)
+# Crawl-delay: 1
+

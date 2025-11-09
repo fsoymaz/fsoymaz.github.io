@@ -138,8 +138,12 @@ export function Hero() {
             <div className="relative aspect-square rounded-3xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center overflow-hidden shadow-2xl">
               <img
                 src="/professional-developer-portrait.jpeg"
-                alt="Fatih Soymaz"
+                alt="Fatih Soymaz - Full Stack Developer, .NET ve React uzmanı"
+                width={600}
+                height={600}
                 className="rounded-3xl object-cover w-full h-full group-hover:scale-105 transition-transform duration-700"
+                loading="eager"
+                fetchPriority="high"
               />
             </div>
           </div>

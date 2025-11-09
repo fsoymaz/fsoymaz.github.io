@@ -151,8 +151,11 @@ export function Projects() {
                     {/* Image */}
                     <img
                       src={project.image || "/placeholder.svg"}
-                      alt={project.title}
+                      alt={`${project.title} - Proje ekran görüntüsü`}
+                      width={400}
+                      height={300}
                       className="w-full h-full object-cover"
+                      loading="lazy"
                     />
 
                     {/* Enhanced Overlay gradient */}
@@ -287,8 +290,11 @@ export function Projects() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent z-10" />
                     <img
                       src={projects[selectedIndex].image || "/placeholder.svg"}
-                      alt={projects[selectedIndex].title}
+                      alt={`${projects[selectedIndex].title} - Detaylı proje ekran görüntüsü ve açıklama`}
+                      width={1200}
+                      height={675}
                       className="w-full h-full object-cover"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 flex items-center justify-center gap-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       {projects[selectedIndex].github && (
