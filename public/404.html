@@ -10,13 +10,15 @@
       // Store the original path
       var path = window.location.pathname;
       
+      // Don't redirect Google verification files or other static HTML files
+      if (path.includes('google') || path.endsWith('.html')) {
+        // Let Google verification files and other HTML files load normally
+        return;
+      }
+      
       // If it's not the root and not a Next.js internal path, redirect to index
-      // Don't redirect Google verification files
-      if (path !== '/' && !path.startsWith('/_next') && !path.endsWith('.html') && !path.includes('.') && !path.includes('google')) {
+      if (path !== '/' && !path.startsWith('/_next') && !path.includes('.')) {
         // Try to load index.html and let client-side routing handle it
-        window.location.replace('/');
-      } else {
-        // For other cases, just redirect to home
         window.location.replace('/');
       }
     })();
