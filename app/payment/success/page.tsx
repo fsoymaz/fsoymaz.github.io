@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,21 +13,10 @@ import {
 import { CheckCircle2, Home, Coffee } from "lucide-react";
 import Link from "next/link";
 
-export default function PaymentSuccessPage() {
+function PaymentSuccessContent() {
   const searchParams = useSearchParams();
-  const router = useRouter();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   const transactionId = searchParams.get("transaction_id");
   const amount = searchParams.get("amount");
-
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-20 bg-gradient-to-b from-muted/20 via-background to-background">
@@ -66,12 +55,7 @@ export default function PaymentSuccessPage() {
                 Ana Sayfaya Dön
               </Link>
             </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="w-full"
-            >
+            <Button asChild variant="outline" size="lg" className="w-full">
               <Link href="/#contact">
                 <Coffee className="h-4 w-4 mr-2" />
                 İletişime Geç
@@ -89,3 +73,16 @@ export default function PaymentSuccessPage() {
   );
 }
 
+export default function PaymentSuccessPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-muted-foreground">Yükleniyor...</div>
+        </div>
+      }
+    >
+      <PaymentSuccessContent />
+    </Suspense>
+  );
+}

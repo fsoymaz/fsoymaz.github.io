@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,21 +13,11 @@ import {
 import { XCircle, Home, RefreshCw } from "lucide-react";
 import Link from "next/link";
 
-export default function PaymentErrorPage() {
+function PaymentErrorContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   const error = searchParams.get("error");
   const errorMessage = searchParams.get("error_message");
-
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-20 bg-gradient-to-b from-muted/20 via-background to-background">
@@ -57,11 +47,7 @@ export default function PaymentErrorPage() {
           )}
 
           <div className="flex flex-col gap-3">
-            <Button
-              onClick={() => router.back()}
-              size="lg"
-              className="w-full"
-            >
+            <Button onClick={() => router.back()} size="lg" className="w-full">
               <RefreshCw className="h-4 w-4 mr-2" />
               Tekrar Dene
             </Button>
@@ -83,3 +69,16 @@ export default function PaymentErrorPage() {
   );
 }
 
+export default function PaymentErrorPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-muted-foreground">Yükleniyor...</div>
+        </div>
+      }
+    >
+      <PaymentErrorContent />
+    </Suspense>
+  );
+}
