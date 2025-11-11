@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -41,29 +41,28 @@ export function Payment({
   const [copied, setCopied] = useState(false);
 
   // Redirect URL'i dinamik olarak al
-  const getRedirectUrl = () => {
+  const redirectUrlValue = useMemo(() => {
     if (redirectUrl) return redirectUrl;
     // Environment variable'dan redirect URL'i al
-    const envRedirectUrl =
-      typeof window !== "undefined"
-        ? process.env.NEXT_PUBLIC_DODO_REDIRECT_URL
-        : undefined;
-    if (envRedirectUrl) return envRedirectUrl;
-    // Varsayılan olarak ana sayfaya yönlendir (Dodo Payments'in önerdiği format)
     if (typeof window !== "undefined") {
+      const envRedirectUrl = process.env.NEXT_PUBLIC_DODO_REDIRECT_URL;
+      if (envRedirectUrl) return envRedirectUrl;
       return window.location.origin;
     }
     return "https://fsoymaz.github.io";
-  };
+  }, [redirectUrl]);
 
-  // Ödeme linkini oluştur
-  const generatePaymentLink = () => {
+  // Ödeme linkini dinamik olarak oluştur (quantity değiştiğinde güncellenir)
+  const paymentLink = useMemo(() => {
     const baseUrl = "https://checkout.dodopayments.com/buy";
-    const redirect = encodeURIComponent(getRedirectUrl());
-    return `${baseUrl}/${finalProductId}?quantity=${quantity}&redirect_url=${redirect}`;
-  };
-
-  const paymentLink = generatePaymentLink();
+    const redirect = encodeURIComponent(redirectUrlValue);
+    const link = `${baseUrl}/${finalProductId}?quantity=${quantity}&redirect_url=${redirect}`;
+    console.log("Generated Payment Link:", link);
+    console.log("Product ID:", finalProductId);
+    console.log("Quantity:", quantity);
+    console.log("Redirect URL:", redirectUrlValue);
+    return link;
+  }, [finalProductId, quantity, redirectUrlValue]);
 
   // Linki kopyala
   const handleCopyLink = async () => {
@@ -79,11 +78,19 @@ export function Payment({
 
   // Ödemeye yönlendir
   const handlePayment = () => {
+    // Link'i tekrar oluştur (güncel değerlerle)
+    const baseUrl = "https://checkout.dodopayments.com/buy";
+    const redirect = encodeURIComponent(redirectUrlValue);
+    const finalLink = `${baseUrl}/${finalProductId}?quantity=${quantity}&redirect_url=${redirect}`;
+
     // Debug için linki konsola yazdır
-    console.log("Payment Link:", paymentLink);
+    console.log("Opening Payment Link:", finalLink);
     console.log("Product ID:", finalProductId);
-    console.log("Redirect URL:", getRedirectUrl());
-    window.open(paymentLink, "_blank");
+    console.log("Quantity:", quantity);
+    console.log("Redirect URL:", redirectUrlValue);
+
+    // Yeni pencerede aç
+    window.open(finalLink, "_blank", "noopener,noreferrer");
     setOpen(false);
     toast.success("Ödeme sayfasına yönlendiriliyorsunuz...");
   };
@@ -151,7 +158,7 @@ export function Payment({
             <Input
               id="redirect-url"
               type="text"
-              value={getRedirectUrl()}
+              value={redirectUrlValue}
               readOnly
               className="h-12 text-base bg-muted"
             />
@@ -170,7 +177,8 @@ export function Payment({
                 type="text"
                 value={paymentLink}
                 readOnly
-                className="h-12 text-base bg-muted font-mono text-sm"
+                className="h-12 text-base bg-muted font-mono text-xs overflow-x-auto"
+                style={{ wordBreak: "break-all" }}
               />
               <Button
                 type="button"
