@@ -49,11 +49,11 @@ export function Payment({
         ? process.env.NEXT_PUBLIC_DODO_REDIRECT_URL
         : undefined;
     if (envRedirectUrl) return envRedirectUrl;
-    // Varsayılan olarak success sayfasına yönlendir
+    // Varsayılan olarak ana sayfaya yönlendir (Dodo Payments'in önerdiği format)
     if (typeof window !== "undefined") {
-      return `${window.location.origin}/payment/success`;
+      return window.location.origin;
     }
-    return "https://fsoymaz.github.io/payment/success";
+    return "https://fsoymaz.github.io";
   };
 
   // Ödeme linkini oluştur
@@ -79,6 +79,10 @@ export function Payment({
 
   // Ödemeye yönlendir
   const handlePayment = () => {
+    // Debug için linki konsola yazdır
+    console.log("Payment Link:", paymentLink);
+    console.log("Product ID:", finalProductId);
+    console.log("Redirect URL:", getRedirectUrl());
     window.open(paymentLink, "_blank");
     setOpen(false);
     toast.success("Ödeme sayfasına yönlendiriliyorsunuz...");
@@ -122,6 +126,22 @@ export function Payment({
               }}
               className="h-12 text-base"
             />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="product-id" className="text-base">
+              Ürün ID
+            </Label>
+            <Input
+              id="product-id"
+              type="text"
+              value={finalProductId}
+              readOnly
+              className="h-12 text-base bg-muted font-mono text-sm"
+            />
+            <p className="text-xs text-muted-foreground">
+              Dodo Payments panelinden bu ID'nin doğru olduğundan emin olun.
+            </p>
           </div>
 
           <div className="space-y-2">
