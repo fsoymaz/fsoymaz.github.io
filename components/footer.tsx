@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Payment } from "@/components/payment";
 
 export function Footer() {
   return (
@@ -125,6 +126,9 @@ export function Footer() {
             >
               <Phone className="size-4 text-white/80" /> +90 555 140 26 02
             </a>
+          </div>
+          <div className="pt-4">
+            <Payment />
           </div>
         </div>
       </div>

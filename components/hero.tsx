@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, ArrowDown, Code2 } from "lucide-react";
 import { ThreeBg } from "@/components/three-bg";
+import { Payment } from "@/components/payment";
 import { useEffect, useRef } from "react";
 
 export function Hero() {
@@ -102,6 +103,7 @@ export function Hero() {
                   <ArrowDown className="h-4 w-4" />
                 </a>
               </Button>
+              <Payment />
             </div>
 
             <div className="flex gap-6 pt-8">

@@ -11,7 +11,8 @@
       var path = window.location.pathname;
       
       // If it's not the root and not a Next.js internal path, redirect to index
-      if (path !== '/' && !path.startsWith('/_next') && !path.endsWith('.html') && !path.includes('.')) {
+      // Don't redirect Google verification files
+      if (path !== '/' && !path.startsWith('/_next') && !path.endsWith('.html') && !path.includes('.') && !path.includes('google')) {
         // Try to load index.html and let client-side routing handle it
         window.location.replace('/');
       } else {

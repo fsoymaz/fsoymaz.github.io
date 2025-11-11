@@ -22,11 +22,13 @@
 ### 3. Source Ayarlarını Değiştirin
 
 **ŞU ANDA MUHTEMELEN:**
+
 - ❌ **"Deploy from a branch"** seçili
 - Branch: `main` veya `gh-pages`
 - Folder: `/ (root)` veya `/docs`
 
 **OLMASI GEREKEN:**
+
 - ✅ **"GitHub Actions"** seçili olmalı
 
 ### 4. Değişikliği Yapın
@@ -87,10 +89,12 @@ Folder: [/ (root) ▼]
 ## 🐛 Hala Çalışmıyorsa
 
 1. **Actions sekmesini kontrol edin:**
+
    - En son workflow run'ın başarılı olduğundan emin olun
    - "Deploy to GitHub Pages" job'ının yeşil tik olduğundan emin olun
 
 2. **Deploy edilen URL'i kontrol edin:**
+
    - Actions → En son workflow → Deploy job → "Deploy to GitHub Pages" step
    - URL'i kontrol edin
 
@@ -105,4 +109,3 @@ Site çalışıyorsa şunları görmelisiniz:
 - ✅ `https://fsoymaz.github.io` - Ana sayfa yükleniyor
 - ✅ Site içeriği görünüyor (404 hatası yok)
 - ✅ Google Search Console'da doğrulama yapabilirsiniz
-
