@@ -35,7 +35,7 @@ export function Payment({
     (typeof window !== "undefined"
       ? process.env.NEXT_PUBLIC_DODO_PRODUCT_ID
       : undefined) ||
-    "pdt_jk1u2M6XEnUMxSlIk1K7C";
+    "pdt_jk1u2M6XEnUMxSIIk1K7C";
   const [quantity, setQuantity] = useState(1);
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
