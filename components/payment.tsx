@@ -103,7 +103,7 @@ export function Payment({
           className="gap-2 h-12 px-8 text-base bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white"
         >
           <Coffee className="h-4 w-4" />
-          Kahve Al
+          PAra Para
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
