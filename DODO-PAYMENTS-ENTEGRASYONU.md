@@ -44,11 +44,13 @@ Bu dokümantasyon, Next.js projesine Dodo Payments ödeme entegrasyonunun nasıl
 ### 1. Bağımlılıklar
 
 **React/Next.js için gerekli paketler:**
+
 - `sonner` (toast bildirimleri için)
 - `@radix-ui/react-dialog` (modal için)
 - `lucide-react` (ikonlar için)
 
 **Pure JavaScript için:**
+
 - Hiçbir npm paketi gerekmez
 - Sadece vanilla JavaScript kullanılır
 - İsteğe bağlı: Toast bildirimleri için basit bir kütüphane (örn: `toastify-js`) veya custom implementasyon
@@ -336,292 +338,324 @@ React/Next.js kullanmıyorsanız, pure JavaScript versiyonunu kullanabilirsiniz.
 ### Kurulum
 
 1. **HTML'e ekleyin:**
+
 ```html
 <!DOCTYPE html>
 <html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dodo Payments Entegrasyonu</title>
     <style>
-        /* Modal stilleri */
-        .payment-modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-        }
-        .payment-modal-content {
-            background-color: #1a1a1a;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #333;
-            width: 90%;
-            max-width: 500px;
-            border-radius: 8px;
-        }
-        .payment-modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .payment-modal-close {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .payment-modal-close:hover {
-            color: #fff;
-        }
-        .payment-input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            background: #2a2a2a;
-            border: 1px solid #444;
-            border-radius: 4px;
-            color: #fff;
-        }
-        .payment-button {
-            padding: 12px 24px;
-            background: linear-gradient(to right, #f59e0b, #ea580c);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .payment-button:hover {
-            opacity: 0.9;
-        }
+      /* Modal stilleri */
+      .payment-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      .payment-modal-content {
+        background-color: #1a1a1a;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #333;
+        width: 90%;
+        max-width: 500px;
+        border-radius: 8px;
+      }
+      .payment-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .payment-modal-close {
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .payment-modal-close:hover {
+        color: #fff;
+      }
+      .payment-input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        background: #2a2a2a;
+        border: 1px solid #444;
+        border-radius: 4px;
+        color: #fff;
+      }
+      .payment-button {
+        padding: 12px 24px;
+        background: linear-gradient(to right, #f59e0b, #ea580c);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .payment-button:hover {
+        opacity: 0.9;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Ödeme Butonu -->
     <button id="paymentBtn" class="payment-button">Kahve Al</button>
 
     <!-- Modal -->
     <div id="paymentModal" class="payment-modal">
-        <div class="payment-modal-content">
-            <div class="payment-modal-header">
-                <h2>Ödeme Linki</h2>
-                <span class="payment-modal-close" id="closeModal">&times;</span>
-            </div>
-            <div>
-                <label>Ürün Miktarı:</label>
-                <input type="number" id="quantity" class="payment-input" value="1" min="1">
-            </div>
-            <div>
-                <label>Ürün ID:</label>
-                <input type="text" id="productId" class="payment-input" value="pdt_jk1u2M6XEnUMxSIIk1K7C" readonly>
-            </div>
-            <div>
-                <label>Yönlendirme URL'i:</label>
-                <input type="text" id="redirectUrl" class="payment-input" value="https://example.com" readonly>
-            </div>
-            <div>
-                <label>Ödeme Linki:</label>
-                <input type="text" id="paymentLink" class="payment-input" readonly>
-            </div>
-            <div style="margin-top: 20px;">
-                <button onclick="copyLink()" class="payment-button">Linki Kopyala</button>
-                <button onclick="goToPayment()" class="payment-button" style="margin-left: 10px;">Ödemeye Git</button>
-            </div>
+      <div class="payment-modal-content">
+        <div class="payment-modal-header">
+          <h2>Ödeme Linki</h2>
+          <span class="payment-modal-close" id="closeModal">&times;</span>
         </div>
+        <div>
+          <label>Ürün Miktarı:</label>
+          <input
+            type="number"
+            id="quantity"
+            class="payment-input"
+            value="1"
+            min="1"
+          />
+        </div>
+        <div>
+          <label>Ürün ID:</label>
+          <input
+            type="text"
+            id="productId"
+            class="payment-input"
+            value="pdt_jk1u2M6XEnUMxSIIk1K7C"
+            readonly
+          />
+        </div>
+        <div>
+          <label>Yönlendirme URL'i:</label>
+          <input
+            type="text"
+            id="redirectUrl"
+            class="payment-input"
+            value="https://example.com"
+            readonly
+          />
+        </div>
+        <div>
+          <label>Ödeme Linki:</label>
+          <input type="text" id="paymentLink" class="payment-input" readonly />
+        </div>
+        <div style="margin-top: 20px;">
+          <button onclick="copyLink()" class="payment-button">
+            Linki Kopyala
+          </button>
+          <button
+            onclick="goToPayment()"
+            class="payment-button"
+            style="margin-left: 10px;"
+          >
+            Ödemeye Git
+          </button>
+        </div>
+      </div>
     </div>
 
     <script src="dodo-payment.js"></script>
-</body>
+  </body>
 </html>
 ```
 
 2. **JavaScript dosyası oluşturun (`dodo-payment.js`):**
+
 ```javascript
 // Dodo Payments Entegrasyonu - Pure JavaScript
 class DodoPayment {
-    constructor(config = {}) {
-        this.productId = config.productId || 'pdt_jk1u2M6XEnUMxSIIk1K7C';
-        this.productName = config.productName || 'fsoymaz portfolio';
-        this.price = config.price || '$0.10';
-        this.redirectUrl = config.redirectUrl || window.location.origin;
-        this.baseUrl = 'https://checkout.dodopayments.com/buy';
-        
-        this.init();
-    }
+  constructor(config = {}) {
+    this.productId = config.productId || "pdt_jk1u2M6XEnUMxSIIk1K7C";
+    this.productName = config.productName || "fsoymaz portfolio";
+    this.price = config.price || "$0.10";
+    this.redirectUrl = config.redirectUrl || window.location.origin;
+    this.baseUrl = "https://checkout.dodopayments.com/buy";
 
-    init() {
-        const modal = document.getElementById('paymentModal');
-        const btn = document.getElementById('paymentBtn');
-        const closeBtn = document.getElementById('closeModal');
-        const quantityInput = document.getElementById('quantity');
-        
-        // Modal açma
-        if (btn) {
-            btn.addEventListener('click', () => {
-                this.updatePaymentLink();
-                modal.style.display = 'block';
-            });
-        }
+    this.init();
+  }
 
-        // Modal kapatma
-        if (closeBtn) {
-            closeBtn.addEventListener('click', () => {
-                modal.style.display = 'none';
-            });
-        }
+  init() {
+    const modal = document.getElementById("paymentModal");
+    const btn = document.getElementById("paymentBtn");
+    const closeBtn = document.getElementById("closeModal");
+    const quantityInput = document.getElementById("quantity");
 
-        // Dışarı tıklayınca kapat
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-
-        // Miktar değiştiğinde linki güncelle
-        if (quantityInput) {
-            quantityInput.addEventListener('input', () => {
-                this.updatePaymentLink();
-            });
-        }
-
-        // İlk linki oluştur
+    // Modal açma
+    if (btn) {
+      btn.addEventListener("click", () => {
         this.updatePaymentLink();
+        modal.style.display = "block";
+      });
     }
 
-    generatePaymentLink(quantity = 1) {
-        const redirect = encodeURIComponent(this.redirectUrl);
-        return `${this.baseUrl}/${this.productId}?quantity=${quantity}&redirect_url=${redirect}`;
+    // Modal kapatma
+    if (closeBtn) {
+      closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
     }
 
-    updatePaymentLink() {
-        const quantityInput = document.getElementById('quantity');
-        const paymentLinkInput = document.getElementById('paymentLink');
-        const productIdInput = document.getElementById('productId');
-        const redirectUrlInput = document.getElementById('redirectUrl');
+    // Dışarı tıklayınca kapat
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
 
-        const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
-        const link = this.generatePaymentLink(quantity);
-
-        if (paymentLinkInput) {
-            paymentLinkInput.value = link;
-        }
-        if (productIdInput) {
-            productIdInput.value = this.productId;
-        }
-        if (redirectUrlInput) {
-            redirectUrlInput.value = this.redirectUrl;
-        }
+    // Miktar değiştiğinde linki güncelle
+    if (quantityInput) {
+      quantityInput.addEventListener("input", () => {
+        this.updatePaymentLink();
+      });
     }
 
-    copyLink() {
-        const paymentLinkInput = document.getElementById('paymentLink');
-        if (paymentLinkInput) {
-            paymentLinkInput.select();
-            document.execCommand('copy');
-            this.showToast('Ödeme linki kopyalandı!', 'success');
-        }
+    // İlk linki oluştur
+    this.updatePaymentLink();
+  }
+
+  generatePaymentLink(quantity = 1) {
+    const redirect = encodeURIComponent(this.redirectUrl);
+    return `${this.baseUrl}/${this.productId}?quantity=${quantity}&redirect_url=${redirect}`;
+  }
+
+  updatePaymentLink() {
+    const quantityInput = document.getElementById("quantity");
+    const paymentLinkInput = document.getElementById("paymentLink");
+    const productIdInput = document.getElementById("productId");
+    const redirectUrlInput = document.getElementById("redirectUrl");
+
+    const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
+    const link = this.generatePaymentLink(quantity);
+
+    if (paymentLinkInput) {
+      paymentLinkInput.value = link;
+    }
+    if (productIdInput) {
+      productIdInput.value = this.productId;
+    }
+    if (redirectUrlInput) {
+      redirectUrlInput.value = this.redirectUrl;
+    }
+  }
+
+  copyLink() {
+    const paymentLinkInput = document.getElementById("paymentLink");
+    if (paymentLinkInput) {
+      paymentLinkInput.select();
+      document.execCommand("copy");
+      this.showToast("Ödeme linki kopyalandı!", "success");
+    }
+  }
+
+  goToPayment() {
+    const quantityInput = document.getElementById("quantity");
+    const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
+    const link = this.generatePaymentLink(quantity);
+
+    console.log("Opening Payment Link:", link);
+    window.open(link, "_blank", "noopener,noreferrer");
+
+    const modal = document.getElementById("paymentModal");
+    if (modal) {
+      modal.style.display = "none";
     }
 
-    goToPayment() {
-        const quantityInput = document.getElementById('quantity');
-        const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
-        const link = this.generatePaymentLink(quantity);
-        
-        console.log('Opening Payment Link:', link);
-        window.open(link, '_blank', 'noopener,noreferrer');
-        
-        const modal = document.getElementById('paymentModal');
-        if (modal) {
-            modal.style.display = 'none';
-        }
-        
-        this.showToast('Ödeme sayfasına yönlendiriliyorsunuz...', 'success');
-    }
+    this.showToast("Ödeme sayfasına yönlendiriliyorsunuz...", "success");
+  }
 
-    showToast(message, type = 'info') {
-        // Basit toast implementasyonu
-        const toast = document.createElement('div');
-        toast.style.cssText = `
+  showToast(message, type = "info") {
+    // Basit toast implementasyonu
+    const toast = document.createElement("div");
+    toast.style.cssText = `
             position: fixed;
             bottom: 20px;
             right: 20px;
             padding: 12px 24px;
-            background: ${type === 'success' ? '#10b981' : '#3b82f6'};
+            background: ${type === "success" ? "#10b981" : "#3b82f6"};
             color: white;
             border-radius: 6px;
             z-index: 10000;
             animation: slideIn 0.3s ease;
         `;
-        toast.textContent = message;
-        document.body.appendChild(toast);
+    toast.textContent = message;
+    document.body.appendChild(toast);
 
-        setTimeout(() => {
-            toast.style.animation = 'slideOut 0.3s ease';
-            setTimeout(() => toast.remove(), 300);
-        }, 3000);
-    }
+    setTimeout(() => {
+      toast.style.animation = "slideOut 0.3s ease";
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  }
 }
 
 // Global fonksiyonlar (HTML'den çağrılabilir)
 function copyLink() {
-    if (window.dodoPayment) {
-        window.dodoPayment.copyLink();
-    }
+  if (window.dodoPayment) {
+    window.dodoPayment.copyLink();
+  }
 }
 
 function goToPayment() {
-    if (window.dodoPayment) {
-        window.dodoPayment.goToPayment();
-    }
+  if (window.dodoPayment) {
+    window.dodoPayment.goToPayment();
+  }
 }
 
 // Sayfa yüklendiğinde başlat
-document.addEventListener('DOMContentLoaded', () => {
-    // Yapılandırma (isteğe bağlı)
-    const config = {
-        productId: 'pdt_jk1u2M6XEnUMxSIIk1K7C', // Environment variable'dan veya config'den alınabilir
-        productName: 'fsoymaz portfolio',
-        price: '$0.10',
-        redirectUrl: window.location.origin // veya 'https://example.com/success'
-    };
+document.addEventListener("DOMContentLoaded", () => {
+  // Yapılandırma (isteğe bağlı)
+  const config = {
+    productId: "pdt_jk1u2M6XEnUMxSIIk1K7C", // Environment variable'dan veya config'den alınabilir
+    productName: "fsoymaz portfolio",
+    price: "$0.10",
+    redirectUrl: window.location.origin, // veya 'https://example.com/success'
+  };
 
-    window.dodoPayment = new DodoPayment(config);
+  window.dodoPayment = new DodoPayment(config);
 });
 ```
 
 ### Kullanım
 
 **Basit kullanım:**
+
 ```html
 <script src="dodo-payment.js"></script>
 <button id="paymentBtn">Kahve Al</button>
 ```
 
 **Özelleştirilmiş kullanım:**
+
 ```javascript
 const payment = new DodoPayment({
-    productId: 'pdt_custom123',
-    productName: 'Özel Ürün',
-    price: '$25.00',
-    redirectUrl: 'https://example.com/success'
+  productId: "pdt_custom123",
+  productName: "Özel Ürün",
+  price: "$25.00",
+  redirectUrl: "https://example.com/success",
 });
 ```
 
 ### Bağımlılıklar
 
 **Pure JavaScript versiyonu için:**
+
 - ✅ Hiçbir npm paketi gerekmez
 - ✅ Sadece vanilla JavaScript
 - ✅ Modern tarayıcı desteği (ES6+)
 - ✅ CSS (custom veya Tailwind)
 
 **Opsiyonel iyileştirmeler:**
+
 - Toast bildirimleri için: `toastify-js` (npm: `toastify-js`)
 - İkonlar için: Font Awesome veya SVG ikonlar
 - Modal için: Daha gelişmiş bir modal kütüphanesi (isteğe bağlı)
