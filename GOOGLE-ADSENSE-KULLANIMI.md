@@ -78,11 +78,22 @@ import { GoogleAdSense } from "@/components/google-adsense";
 
 ## 📍 Mevcut Banner Konumları
 
-Ana sayfada 3 banner alanı var:
+Ana sayfada 3 banner alanı var (AdSense politikalarına uygun):
 
-1. **Hero ve About arası** - Üst banner
-2. **About ve Projects arası** - İçerik banner
-3. **Skills ve Contact arası** - Alt banner
+1. **About sonrası** - İçerikli bölümden sonra (InArticle)
+2. **Projects sonrası** - İçerikli bölümden sonra (Banner)
+3. **Skills sonrası** - İçerikli bölümden sonra (Banner)
+
+### ⚠️ Politika Uyumluluğu
+
+**Kaldırılan Reklamlar:**
+- ❌ Hero sonrası: Yeterince içerik yok (minimal başlık/CTA)
+- ❌ Contact sonrası: Form sayfası (davranışsal amaçlı ekran)
+
+**AdSense Politikası:**
+- Reklamlar sadece yeterince içerik olan sayfalarda gösterilebilir
+- En az 200-300 kelime içerik olmalı
+- Navigasyon, uyarı, form veya boş sayfalarda reklam gösterilemez
 
 ## 🎨 Banner Ekleme/Çıkarma
 
@@ -125,6 +136,11 @@ Eğer AdSense'den özel slot ID aldıysanız:
 2. **İçerik Politikası**: AdSense politikalarına uygun içerik gerekli
 3. **Trafik**: Yeterli trafik olmalı (genellikle günlük 100+ ziyaretçi)
 4. **Test Modu**: Geliştirme sırasında reklamlar görünmeyebilir (normal)
+5. **Politika İhlalleri**: Reklamları sadece içerikli sayfalarda gösterin
+   - ❌ Hero/landing sayfalarında (yeterince içerik yok)
+   - ❌ Form sayfalarında (davranışsal amaçlı)
+   - ❌ Boş/yapım aşamasında sayfalarda
+   - ✅ İçerikli sayfalarda (About, Projects, Skills gibi)
 
 ## 🚀 AdSense Hesabı Kurulumu
 
@@ -198,7 +214,27 @@ import { AdSenseSidebar } from "@/components/google-adsense";
 </div>;
 ```
 
+## 🚨 Politika İhlali Düzeltmeleri
+
+### Yapılan Düzeltmeler (2025-01-XX)
+
+**Sorun:** "Yayıncı içeriği olmayan ekranlarda gösterilen reklamlar" ihlali
+
+**Çözüm:**
+1. ✅ Hero sonrası reklam kaldırıldı (yeterince içerik yok)
+2. ✅ Contact sonrası reklam kaldırıldı (form sayfası)
+3. ✅ Reklamlar sadece içerikli bölümlerden sonra gösteriliyor:
+   - About sonrası (yeterince içerik var)
+   - Projects sonrası (yeterince içerik var)
+   - Skills sonrası (yeterince içerik var)
+
+### AdSense Yeniden İnceleme Talebi
+
+1. AdSense panelinde "Sorunları giderdiğimi onaylıyorum" kutusunu işaretleyin
+2. "İnceleme iste" butonuna tıklayın
+3. 1-2 hafta içinde sonuç alırsınız
+
 ---
 
 **Son Güncelleme**: 2025-01-XX
-**Versiyon**: 1.0.0
+**Versiyon**: 1.1.0 (Politika İhlali Düzeltmeleri)
