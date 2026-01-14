@@ -58,7 +58,11 @@ pipeline {
                             export NVM_DIR="$HOME/.nvm"
                             [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
                             nvm install ${NODE_VERSION}
-                            nvm use ${NODE_VERSION}
+                            nvm use --delete-prefix ${NODE_VERSION} --silent || nvm use ${NODE_VERSION}
+                        else
+                            export NVM_DIR="$HOME/.nvm"
+                            [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+                            nvm use --delete-prefix ${NODE_VERSION} --silent || nvm use ${NODE_VERSION} || true
                         fi
                         node --version
                         npm --version
@@ -68,7 +72,7 @@ pipeline {
                     sh '''
                         export NVM_DIR="$HOME/.nvm"
                         [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
-                        nvm use ${NODE_VERSION}
+                        nvm use --delete-prefix ${NODE_VERSION} --silent || nvm use ${NODE_VERSION} || true
                         cd frontend
                         npm install
                         npm run build
