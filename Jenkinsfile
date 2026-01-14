@@ -109,12 +109,15 @@ pipeline {
                             git config user.name "Jenkins"
                             git config user.email "jenkins@ci"
                             
+                            # Fetch all branches
+                            git fetch origin
+                            
                             # Main branch'e geç
-                            git checkout main || git checkout -b main
+                            git checkout main || git checkout -b main origin/main
                             
                             # .gitattributes merge stratejisini kullanarak merge yap
                             # Test dosyaları otomatik olarak exclude edilecek
-                            git merge test --no-edit -m "Merge test to main [skip ci]" -X ours || {
+                            git merge origin/test --no-edit -m "Merge test to main [skip ci]" -X ours || {
                                 echo "Merge conflict or error occurred"
                                 exit 1
                             }
