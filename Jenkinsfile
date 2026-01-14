@@ -130,8 +130,12 @@ pipeline {
                                 git commit -m "Remove test files from main branch [skip ci]" || echo "No changes to commit"
                             fi
                             
-                            # Push et
-                            git push origin main || echo "No changes to push or push failed"
+                            # Push et (GitHub token ile)
+                            git remote set-url origin https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git
+                            git push origin main || {
+                                echo "Push failed. Check GitHub token permissions."
+                                exit 1
+                            }
                         '''
                     }
                 }
