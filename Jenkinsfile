@@ -4,6 +4,8 @@ pipeline {
     environment {
         DOTNET_VERSION = '8.0'
         NODE_VERSION = '18'
+        GITHUB_TOKEN = credentials('31')
+        GITHUB_REPO = 'fsoymaz/fsoymaz.github.io'
     }
     
     stages {
