@@ -53,7 +53,9 @@ pipeline {
                     
                     // Node.js Setup
                     sh '''
-                        # Temporarily disable .npmrc BEFORE sourcing nvm.sh to avoid auto-use issues
+                        # Disable nvm auto-use to avoid .npmrc conflicts
+                        export NVM_AUTO_MODE="none"
+                        # Temporarily disable .npmrc BEFORE sourcing nvm.sh
                         if [ -f "$HOME/.npmrc" ]; then
                             mv "$HOME/.npmrc" "$HOME/.npmrc.backup" || true
                         fi
@@ -65,8 +67,9 @@ pipeline {
                         fi
                         export NVM_DIR="$HOME/.nvm"
                         [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
-                        nvm use ${NODE_VERSION} 2>/dev/null || nvm use --delete-prefix ${NODE_VERSION} --silent 2>/dev/null || true
-                        # Restore .npmrc after nvm use
+                        # Use node directly from PATH without nvm use
+                        export PATH="$NVM_DIR/versions/node/v${NODE_VERSION}/bin:$PATH" 2>/dev/null || export PATH="$NVM_DIR/versions/node/${NODE_VERSION}/bin:$PATH" 2>/dev/null || true
+                        # Restore .npmrc
                         if [ -f "$HOME/.npmrc.backup" ]; then
                             mv "$HOME/.npmrc.backup" "$HOME/.npmrc" || true
                         fi
@@ -76,14 +79,17 @@ pipeline {
                     
                     // Build Frontend
                     sh '''
-                        # Temporarily disable .npmrc BEFORE sourcing nvm.sh to avoid auto-use issues
+                        # Disable nvm auto-use to avoid .npmrc conflicts
+                        export NVM_AUTO_MODE="none"
+                        # Temporarily disable .npmrc BEFORE sourcing nvm.sh
                         if [ -f "$HOME/.npmrc" ]; then
                             mv "$HOME/.npmrc" "$HOME/.npmrc.backup" || true
                         fi
                         export NVM_DIR="$HOME/.nvm"
                         [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
-                        nvm use ${NODE_VERSION} 2>/dev/null || nvm use --delete-prefix ${NODE_VERSION} --silent 2>/dev/null || true
-                        # Restore .npmrc after nvm use
+                        # Use node directly from PATH without nvm use
+                        export PATH="$NVM_DIR/versions/node/v${NODE_VERSION}/bin:$PATH" 2>/dev/null || export PATH="$NVM_DIR/versions/node/${NODE_VERSION}/bin:$PATH" 2>/dev/null || true
+                        # Restore .npmrc
                         if [ -f "$HOME/.npmrc.backup" ]; then
                             mv "$HOME/.npmrc.backup" "$HOME/.npmrc" || true
                         fi
@@ -163,7 +169,9 @@ pipeline {
                     
                     // Node.js Setup
                     sh '''
-                        # Temporarily disable .npmrc BEFORE sourcing nvm.sh to avoid auto-use issues
+                        # Disable nvm auto-use to avoid .npmrc conflicts
+                        export NVM_AUTO_MODE="none"
+                        # Temporarily disable .npmrc BEFORE sourcing nvm.sh
                         if [ -f "$HOME/.npmrc" ]; then
                             mv "$HOME/.npmrc" "$HOME/.npmrc.backup" || true
                         fi
@@ -175,8 +183,9 @@ pipeline {
                         fi
                         export NVM_DIR="$HOME/.nvm"
                         [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
-                        nvm use ${NODE_VERSION} 2>/dev/null || nvm use --delete-prefix ${NODE_VERSION} --silent 2>/dev/null || true
-                        # Restore .npmrc after nvm use
+                        # Use node directly from PATH without nvm use
+                        export PATH="$NVM_DIR/versions/node/v${NODE_VERSION}/bin:$PATH" 2>/dev/null || export PATH="$NVM_DIR/versions/node/${NODE_VERSION}/bin:$PATH" 2>/dev/null || true
+                        # Restore .npmrc
                         if [ -f "$HOME/.npmrc.backup" ]; then
                             mv "$HOME/.npmrc.backup" "$HOME/.npmrc" || true
                         fi
@@ -186,14 +195,17 @@ pipeline {
                     
                     // Build Frontend
                     sh '''
-                        # Temporarily disable .npmrc BEFORE sourcing nvm.sh to avoid auto-use issues
+                        # Disable nvm auto-use to avoid .npmrc conflicts
+                        export NVM_AUTO_MODE="none"
+                        # Temporarily disable .npmrc BEFORE sourcing nvm.sh
                         if [ -f "$HOME/.npmrc" ]; then
                             mv "$HOME/.npmrc" "$HOME/.npmrc.backup" || true
                         fi
                         export NVM_DIR="$HOME/.nvm"
                         [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
-                        nvm use ${NODE_VERSION} 2>/dev/null || nvm use --delete-prefix ${NODE_VERSION} --silent 2>/dev/null || true
-                        # Restore .npmrc after nvm use
+                        # Use node directly from PATH without nvm use
+                        export PATH="$NVM_DIR/versions/node/v${NODE_VERSION}/bin:$PATH" 2>/dev/null || export PATH="$NVM_DIR/versions/node/${NODE_VERSION}/bin:$PATH" 2>/dev/null || true
+                        # Restore .npmrc
                         if [ -f "$HOME/.npmrc.backup" ]; then
                             mv "$HOME/.npmrc.backup" "$HOME/.npmrc" || true
                         fi
@@ -204,14 +216,17 @@ pipeline {
                     
                     // Deploy to GitHub Pages
                     sh '''
-                        # Temporarily disable .npmrc BEFORE sourcing nvm.sh to avoid auto-use issues
+                        # Disable nvm auto-use to avoid .npmrc conflicts
+                        export NVM_AUTO_MODE="none"
+                        # Temporarily disable .npmrc BEFORE sourcing nvm.sh
                         if [ -f "$HOME/.npmrc" ]; then
                             mv "$HOME/.npmrc" "$HOME/.npmrc.backup" || true
                         fi
                         export NVM_DIR="$HOME/.nvm"
                         [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
-                        nvm use ${NODE_VERSION} 2>/dev/null || nvm use --delete-prefix ${NODE_VERSION} --silent 2>/dev/null || true
-                        # Restore .npmrc after nvm use
+                        # Use node directly from PATH without nvm use
+                        export PATH="$NVM_DIR/versions/node/v${NODE_VERSION}/bin:$PATH" 2>/dev/null || export PATH="$NVM_DIR/versions/node/${NODE_VERSION}/bin:$PATH" 2>/dev/null || true
+                        # Restore .npmrc
                         if [ -f "$HOME/.npmrc.backup" ]; then
                             mv "$HOME/.npmrc.backup" "$HOME/.npmrc" || true
                         fi
