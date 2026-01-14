@@ -10,7 +10,6 @@ type View = 'login' | 'register' | 'home';
 function App() {
   const [view, setView] = useState<View>('login');
   const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
     // Check if user is already logged in
@@ -18,14 +17,12 @@ function App() {
     const savedToken = localStorage.getItem('token');
     if (savedUser && savedToken) {
       setUser(JSON.parse(savedUser));
-      setToken(savedToken);
       setView('home');
     }
   }, []);
 
   const handleLoginSuccess = (loggedInUser: User, loggedInToken: string) => {
     setUser(loggedInUser);
-    setToken(loggedInToken);
     localStorage.setItem('user', JSON.stringify(loggedInUser));
     localStorage.setItem('token', loggedInToken);
     setView('home');
@@ -38,7 +35,6 @@ function App() {
 
   const handleLogout = () => {
     setUser(null);
-    setToken(null);
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     setView('login');
