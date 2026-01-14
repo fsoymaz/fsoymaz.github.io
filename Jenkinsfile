@@ -53,6 +53,10 @@ pipeline {
                     
                     // Node.js Setup
                     sh '''
+                        # Temporarily disable .npmrc BEFORE sourcing nvm.sh to avoid auto-use issues
+                        if [ -f "$HOME/.npmrc" ]; then
+                            mv "$HOME/.npmrc" "$HOME/.npmrc.backup" || true
+                        fi
                         if ! command -v node &> /dev/null; then
                             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
                             export NVM_DIR="$HOME/.nvm"
@@ -61,10 +65,6 @@ pipeline {
                         fi
                         export NVM_DIR="$HOME/.nvm"
                         [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
-                        # Temporarily disable .npmrc if it has prefix/globalconfig issues
-                        if [ -f "$HOME/.npmrc" ]; then
-                            mv "$HOME/.npmrc" "$HOME/.npmrc.backup" || true
-                        fi
                         nvm use ${NODE_VERSION} 2>/dev/null || nvm use --delete-prefix ${NODE_VERSION} --silent 2>/dev/null || true
                         # Restore .npmrc after nvm use
                         if [ -f "$HOME/.npmrc.backup" ]; then
