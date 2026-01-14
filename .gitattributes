@@ -1,0 +1,6 @@
+# Test dosyaları sadece test branch'inde kalacak
+# Main branch'e merge edilirken bu dosyalar ignore edilecek
+Backend.Tests/ merge=ours
+Backend.Tests/** merge=ours
+*.Tests.csproj merge=ours
+

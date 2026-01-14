@@ -7,3 +7,41 @@ build/
 coverage/
 *.log
 .DS_Store
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.dll
+*.exe
+*.pdb
+*.userosscache
+*.sln.docstates
+
+# Entity Framework
+**/Migrations/*.cs
+!**/Migrations/.gitkeep
+
+# Test files - should not be merged to main branch
+# Test dosyaları test branch'inde kalır, main'e merge edilmez
+# Bu .gitattributes dosyası ile yönetilir
+# Note: .gitattributes handles merge strategy, but we keep this for safety
+
+# React
+frontend/build/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# IDE
+.vs/
+.idea/
+*.swp
+*.swo
+*~
