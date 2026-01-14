@@ -125,7 +125,7 @@ pipeline {
                             # Eğer test klasörü hala varsa (gitattributes çalışmadıysa), manuel olarak kaldır
                             if [ -d "Backend.Tests" ]; then
                                 git rm -rf Backend.Tests/ 2>/dev/null || true
-                                git commit --amend --no-edit || echo "No changes to amend"
+                                git commit -m "Remove test files from main branch [skip ci]" || echo "No changes to commit"
                             fi
                             
                             # Push et
