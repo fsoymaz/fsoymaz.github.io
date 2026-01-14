@@ -56,7 +56,7 @@ pipeline {
                         if ! command -v node &> /dev/null; then
                             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
                             export NVM_DIR="$HOME/.nvm"
-                            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+                            [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
                             nvm install ${NODE_VERSION}
                             nvm use ${NODE_VERSION}
                         fi
@@ -67,7 +67,7 @@ pipeline {
                     // Build Frontend
                     sh '''
                         export NVM_DIR="$HOME/.nvm"
-                        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+                        [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
                         cd frontend
                         npm install
@@ -148,7 +148,7 @@ pipeline {
                         if ! command -v node &> /dev/null; then
                             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
                             export NVM_DIR="$HOME/.nvm"
-                            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+                            [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
                             nvm install ${NODE_VERSION}
                             nvm use ${NODE_VERSION}
                         fi
@@ -159,7 +159,7 @@ pipeline {
                     // Build Frontend
                     sh '''
                         export NVM_DIR="$HOME/.nvm"
-                        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+                        [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
                         cd frontend
                         npm install
@@ -169,7 +169,7 @@ pipeline {
                     // Deploy to GitHub Pages
                     sh '''
                         export NVM_DIR="$HOME/.nvm"
-                        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+                        [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
                         npm install -g gh-pages
                         cd frontend
